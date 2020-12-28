@@ -84,7 +84,7 @@ Remember in Rust that:
 [[exercises]]
 name = "pattern-match-1"
 path = "exercises/cs140e/pattern-match-1.rs"
-mode = "compile"
+mode = "test"
 hint = "No hints this time ;)"
 
 # FUNCTIONS
