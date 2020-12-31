@@ -10,7 +10,6 @@ struct Person {
     age: usize,
 }
 
-// I AM NOT DONE
 // Steps:
 // 1. Split the given string on the commas present in it
 // 2. Extract the first element from the split operation and use it as the name
@@ -21,6 +20,18 @@ struct Person {
 impl FromStr for Person {
     type Err = String;
     fn from_str(s: &str) -> Result<Person, Self::Err> {
+        let mut s = s.split(',');
+
+        if let (Some(name), Some(age)) = (s.next(), s.next()) {
+            if !name.is_empty() && !age.is_empty() {
+                match age.parse::<usize>() {
+                    Ok(age) => return Ok(Person{ name: String::from(name), age: age }),
+                    _ => {},
+                }
+            }
+        }
+
+        Err(String::from("Failed to parse name and age!"))
     }
 }
 
