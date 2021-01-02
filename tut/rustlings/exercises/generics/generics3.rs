@@ -10,18 +10,47 @@
 
 // Execute 'rustlings hint generics3' for hints!
 
-// I AM NOT DONE
+pub trait Grade {
+    fn grade(&self) -> String;
+}
 
-pub struct ReportCard {
-    pub grade: f32,
+impl Grade for f32 {
+    fn grade(&self) -> String {
+        if *self < 0.0 || *self > 4.0 {
+            return format!("{}", -1) 
+        }
+        format!("{}", self)
+    }
+}
+
+impl Grade for &str {
+    fn grade(&self) -> String {
+        let valid = vec![
+            "F-", "F", "F+",
+            "D-", "D", "D+",
+            "C-", "C", "C+",
+            "B-", "B", "B+",
+            "A-", "A", "A+",
+        ];
+
+        if !valid.contains(self) {
+            return String::from("invalid")
+        }
+
+        format!("{}", self)
+    }
+}
+
+pub struct ReportCard<T: Grade> {
+    pub grade: T,
     pub student_name: String,
     pub student_age: u8,
 }
 
-impl ReportCard {
+impl<T: Grade> ReportCard<T> {
     pub fn print(&self) -> String {
         format!("{} ({}) - achieved a grade of {}",
-            &self.student_name, &self.student_age, &self.grade)
+            &self.student_name, &self.student_age, &self.grade.grade())
     }
 }
 
@@ -44,9 +73,8 @@ mod tests {
 
     #[test]
     fn generate_alphabetic_report_card() {
-        // TODO: Make sure to change the grade here after you finish the exercise.
         let report_card = ReportCard {
-            grade: 2.1,
+            grade: "A+",
             student_name: "Gary Plotter".to_string(),
             student_age: 11,
         };

@@ -1,6 +1,6 @@
 // FIXME: Make me pass! Diff budget: 30 lines.
 
-// I AM NOT DONE
+use std::fmt;
 
 #[derive(Default)]
 struct Builder {
@@ -9,13 +9,31 @@ struct Builder {
 }
 
 impl Builder {
-    // fn string(...
+    fn string<T: Into<String>>(&mut self, ins: T) -> &mut Self {
+        self.string = Some(ins.into());
+        self
+    }
 
-    // fn number(...
+    fn number(&mut self, inu: usize) -> &mut Self {
+        self.number = Some(inu);
+        self
+    }
 }
 
-impl ToString for Builder {
-    // Implement the trait
+impl fmt::Display for Builder {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        let mut out = String::new();
+        if let Some(string) = &self.string {
+            out.push_str(&format!("{}", string));
+            if let Some(number) = self.number {
+                out.push_str(&format!(" {:?}", number));
+            }
+        } else if let Some(number) = self.number {
+            out.push_str(&format!("{:?}", number));
+        }
+
+        write!(f, "{}", out)
+    }
 }
 
 // Do not modify this function.
