@@ -20,7 +20,6 @@ impl From<ErrorB> for Error {
     }
 }
 
-
 // What traits does `Error` need to implement?
 
 fn do_a() -> Result<u16, ErrorA> {

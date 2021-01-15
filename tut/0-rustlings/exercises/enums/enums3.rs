@@ -67,4 +67,5 @@ mod tests {
         assert_eq!(state.position.y, 15);
         assert_eq!(state.quit, true);
     }
+
 }

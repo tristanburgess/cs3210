@@ -33,20 +33,20 @@ mod tests {
     #[test]
     fn test_iterate_string_vec() {
         let words = vec!["hello", "world"];
-        let capitalized_words: Vec<String> = 
-            vec!["hello", "world"].iter()
-                                .map(|x| capitalize_first(x))
-                                .collect();
+        let capitalized_words: Vec<String> = vec!["hello", "world"]
+            .iter()
+            .map(|x| capitalize_first(x))
+            .collect();
         assert_eq!(capitalized_words, ["Hello", "World"]);
     }
 
     #[test]
     fn test_iterate_into_string() {
         let words = vec!["hello", " ", "world"];
-        let capitalized_words = 
-            words.iter()
-                .map(|x| capitalize_first(x))
-                .collect::<String>();
+        let capitalized_words = words
+            .iter()
+            .map(|x| capitalize_first(x))
+            .collect::<String>();
         assert_eq!(capitalized_words, "Hello World");
     }
 }

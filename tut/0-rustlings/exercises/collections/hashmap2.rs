@@ -33,12 +33,15 @@ fn fruit_basket(basket: &mut HashMap<Fruit, u32>) {
     ];
 
     let fruits_so_far = basket.values().sum::<u32>();
-    let kinds_not_in_basket = fruit_kinds.len() - basket.keys().filter(|k| fruit_kinds.contains(k)).count();
+    let kinds_not_in_basket =
+        fruit_kinds.len() - basket.keys().filter(|k| fruit_kinds.contains(k)).count();
     for fruit in fruit_kinds {
         if (fruits_so_far >= 11) {
             basket.entry(fruit).or_insert(1);
         } else {
-            basket.entry(fruit).or_insert(((11.0 - fruits_so_far as f64) / kinds_not_in_basket as f64).ceil() as u32);
+            basket.entry(fruit).or_insert(
+                ((11.0 - fruits_so_far as f64) / kinds_not_in_basket as f64).ceil() as u32,
+            );
         }
     }
 }
@@ -77,9 +80,7 @@ mod tests {
     fn greater_than_eleven_fruits() {
         let mut basket = get_fruit_basket();
         fruit_basket(&mut basket);
-        let count = basket
-            .values()
-            .sum::<u32>();
+        let count = basket.values().sum::<u32>();
         assert!(count > 11);
     }
 }

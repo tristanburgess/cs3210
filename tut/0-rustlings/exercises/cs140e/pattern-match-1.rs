@@ -3,7 +3,11 @@
 // Do not change this definition.
 macro_rules! is_enum_variant {
     ($v:expr, $p:pat) => {
-        if let $p = $v { true } else { false }
+        if let $p = $v {
+            true
+        } else {
+            false
+        }
     };
 }
 
@@ -15,7 +19,7 @@ enum MyEnum {
 fn matcher(val: &MyEnum) -> &str {
     match &val {
         MyEnum::A(string) => string.as_str(),
-        MyEnum::B(string) => string.as_str()
+        MyEnum::B(string) => string.as_str(),
     }
 }
 

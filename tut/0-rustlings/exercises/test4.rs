@@ -7,13 +7,11 @@
 
 #[macro_export]
 macro_rules! my_macro {
-    ($val:expr) => {
-        {
-            let mut out = String::from("Hello ");
-            out.push_str(&$val.to_string());
-            out
-        }
-    }
+    ($val:expr) => {{
+        let mut out = String::from("Hello ");
+        out.push_str(&$val.to_string());
+        out
+    }};
 }
 
 fn main() {

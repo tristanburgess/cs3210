@@ -17,7 +17,7 @@ pub trait Grade {
 impl Grade for f32 {
     fn grade(&self) -> String {
         if *self < 0.0 || *self > 4.0 {
-            return format!("{}", -1) 
+            return format!("{}", -1);
         }
         format!("{}", self)
     }
@@ -26,15 +26,11 @@ impl Grade for f32 {
 impl Grade for &str {
     fn grade(&self) -> String {
         let valid = vec![
-            "F-", "F", "F+",
-            "D-", "D", "D+",
-            "C-", "C", "C+",
-            "B-", "B", "B+",
-            "A-", "A", "A+",
+            "F-", "F", "F+", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A", "A+",
         ];
 
         if !valid.contains(self) {
-            return String::from("invalid")
+            return String::from("invalid");
         }
 
         format!("{}", self)
@@ -49,8 +45,12 @@ pub struct ReportCard<T: Grade> {
 
 impl<T: Grade> ReportCard<T> {
     pub fn print(&self) -> String {
-        format!("{} ({}) - achieved a grade of {}",
-            &self.student_name, &self.student_age, &self.grade.grade())
+        format!(
+            "{} ({}) - achieved a grade of {}",
+            &self.student_name,
+            &self.student_age,
+            &self.grade.grade()
+        )
     }
 }
 
